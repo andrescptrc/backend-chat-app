@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",
+
+    /* Modules */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["./models/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@constants/*": ["./constants/*"],
+      "@routes/*": ["./routes/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@db/*": ["./db/*"]
+    },
+
+    /* Emit */
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

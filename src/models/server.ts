@@ -5,7 +5,6 @@ import { DEFAULT_PORT } from '@constants/port';
 import { IPath } from '@interfaces/path';
 
 import authRoute from '@routes/auth';
-import { openIDConfig } from '@lib/openid-connect-config';
 
 class Server {
   app: Application;

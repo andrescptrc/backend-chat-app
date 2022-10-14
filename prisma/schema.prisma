@@ -14,6 +14,7 @@ model User {
   uid          String  @id @default(uuid())
   email        String  @unique
   name         String
+  password     String
   phone_number String?
   picture_url  String?
   state        Boolean

@@ -14,8 +14,9 @@
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
       "@interfaces/*": ["./interfaces/*"],
+      "@helpers/*": ["./helpers/*"],
       "@db/*": ["./db/*"],
-      "@lib/*": ["./lib/*"],
+      "@lib/*": ["./lib/*"]
     },
 
     /* Emit */

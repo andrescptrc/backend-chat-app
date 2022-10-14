@@ -1,12 +1,11 @@
-import express, { Application } from "express";
-import cors from "cors";
+import express, { Application } from 'express';
+import cors from 'cors';
 
-import { DEFAULT_PORT } from "@constants/port";
-import { IPath } from "@interfaces/path";
+import { DEFAULT_PORT } from '@constants/port';
+import { IPath } from '@interfaces/path';
 
-import authRoute from "@routes/auth";
-import { auth } from "express-openid-connect";
-import { openIDConfig } from "@lib/openid-connect-config";
+import authRoute from '@routes/auth';
+import { openIDConfig } from '@lib/openid-connect-config';
 
 class Server {
   app: Application;
@@ -17,7 +16,7 @@ class Server {
     this.app = express();
     this.PORT = process.env.PORT || DEFAULT_PORT;
     this.apiPaths = {
-      auth: "/api/auth",
+      auth: '/api/auth'
     };
 
     this.middlewares();
@@ -28,8 +27,6 @@ class Server {
     this.app.use(cors());
 
     this.app.use(express.json());
-
-    this.app.use(auth(openIDConfig()));
   }
 
   routes(): void {
@@ -38,7 +35,7 @@ class Server {
 
   listen(): void {
     this.app.listen(this.PORT, () => {
-      console.log("Server running on the port: " + this.PORT);
+      console.log('Server running on the port: ' + this.PORT);
     });
   }
 }

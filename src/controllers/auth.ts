@@ -35,9 +35,49 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    const token = generateJWT(user.uid);
+    const token = await generateJWT(user.uid);
 
     res.status(200).json({
+      token
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: 'Internal Server Error'
+    });
+  }
+};
+
+export const register = async (req: Request, res: Response) => {
+  const { email, name, password, phone_number } = req.body;
+
+  try {
+    const userDB = await prisma.user.findUnique({
+      where: {
+        email
+      }
+    });
+
+    if (userDB) {
+      return res.status(404).json({
+        msg: 'The user already exist'
+      });
+    }
+
+    const newUser = {
+      name,
+      email,
+      password,
+      phone_number
+    };
+
+    const user = await prisma.user.create({
+      data: newUser
+    });
+
+    const token = await generateJWT(user.uid);
+
+    res.status(201).json({
+      user,
       token
     });
   } catch (error) {

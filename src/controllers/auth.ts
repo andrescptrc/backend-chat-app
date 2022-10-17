@@ -4,6 +4,7 @@ import prisma from '@lib/prisma-client';
 
 import * as argon2 from 'argon2';
 import generateJWT from '@helpers/generate-jwt';
+import { generateResponseController } from '@helpers/generate-response';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -27,23 +28,27 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    const verifyPassword = argon2.verify(user.password, password);
+    const verifyPassword = await argon2.verify(user.password, password);
 
     if (!verifyPassword) {
-      return res.status(404).json({
-        msg: 'Incorrect email or password'
-      });
+      const response = generateResponseController(undefined, [
+        'The email or password are incorrect'
+      ]);
+
+      return res.status(404).json(response);
     }
 
     const token = await generateJWT(user.uid);
 
-    res.status(200).json({
-      token
-    });
+    const response = generateResponseController({ token }, undefined);
+
+    res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({
-      msg: 'Internal Server Error'
-    });
+    const response = generateResponseController(undefined, [
+      'Internal Server Error'
+    ]);
+
+    res.status(500).json(response);
   }
 };
 
@@ -58,15 +63,19 @@ export const register = async (req: Request, res: Response) => {
     });
 
     if (userDB) {
-      return res.status(404).json({
-        msg: 'The user already exist'
-      });
+      const response = generateResponseController(undefined, [
+        'The user already exist'
+      ]);
+
+      return res.status(404).json(response);
     }
+
+    const hashedPassword = await argon2.hash(password);
 
     const newUser = {
       name,
       email,
-      password,
+      password: hashedPassword,
       phone_number
     };
 
@@ -75,11 +84,13 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const token = await generateJWT(user.uid);
-
-    res.status(201).json({
+    const dataResponse = {
       user,
       token
-    });
+    };
+    const response = generateResponseController(dataResponse, undefined);
+
+    res.status(201).json(response);
   } catch (error) {
     res.status(500).json({
       msg: 'Internal Server Error'

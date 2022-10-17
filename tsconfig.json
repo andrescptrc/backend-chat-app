@@ -11,6 +11,7 @@
     "paths": {
       "@models/*": ["./models/*"],
       "@controllers/*": ["./controllers/*"],
+      "@middlewares/*": ["./middlewares/*"],
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
       "@interfaces/*": ["./interfaces/*"],
@@ -24,6 +25,8 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
 
     /* Type Checking */
     "strict": true,

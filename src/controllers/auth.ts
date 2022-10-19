@@ -44,6 +44,7 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(200).json(response);
   } catch (error) {
+    console.log(error);
     const response = generateResponseController(undefined, [
       'Internal Server Error'
     ]);
@@ -92,8 +93,10 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json(response);
   } catch (error) {
-    res.status(500).json({
-      msg: 'Internal Server Error'
-    });
+    console.log(error);
+    const response = generateResponseController(undefined, [
+      'Internal Server Error'
+    ]);
+    res.status(500).json(response);
   }
 };

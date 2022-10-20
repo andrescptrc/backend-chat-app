@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
 import prisma from '@lib/prisma-client';
-
 import * as argon2 from 'argon2';
+
 import generateJWT from '@helpers/generate-jwt';
+
 import { generateResponseController } from '@helpers/generate-response';
 
 export const login = async (req: Request, res: Response) => {
@@ -85,11 +86,8 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const token = await generateJWT(user.uid);
-    const dataResponse = {
-      user,
-      token
-    };
-    const response = generateResponseController(dataResponse, undefined);
+
+    const response = generateResponseController({ token }, undefined);
 
     res.status(201).json(response);
   } catch (error) {

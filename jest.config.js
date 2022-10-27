@@ -6,6 +6,8 @@ module.exports = {
     '!src/mocks/**'
   ],
   coveragePathIgnorePatterns: [],
+  setupFiles: ['dotenv/config'],
+  setupFilesAfterEnv: ['./config/jest/setup-files.js'],
   modulePaths: ['<rootDir>'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
@@ -17,10 +19,21 @@ module.exports = {
     '^.+\\.module\\.(css|sass|scss)$'
   ],
   modulePaths: ['<rootDir>'],
-  moduleFileExtensions: ['ts', 'web.js', 'js', 'web.ts', 'json', 'jsx', 'node'],
+  moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
   ],
-  resetMocks: true
+  resetMocks: true,
+  moduleNameMapper: {
+    '^@models/(.*)': ['<rootDir>/models/$1'],
+    '^@controllers/(.*)': ['<rootDir>/controllers/$1'],
+    '^@middlewares/(.*)': ['<rootDir>/middlewares/$1'],
+    '^@constants/(.*)': ['<rootDir>/constants/$1'],
+    '^@routes/(.*)': ['<rootDir>/routes/$1'],
+    '^@interfaces/(.*)': ['<rootDir>/interfaces/$1'],
+    '^@helpers/(.*)': ['<rootDir>/helpers/$1'],
+    '^@db/(.*)': ['<rootDir>/db/$1'],
+    '^@lib/(.*)': ['<rootDir>/lib/$1']
+  }
 };

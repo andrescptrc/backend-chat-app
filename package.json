@@ -6,8 +6,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "nodemon ./dist/main.js",
-    "build": "tsc && tsc-alias",
-    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json && (concurrently \"tsc -p tsconfig.build.json -w\" \"tsc-alias -p tsconfig.build.json -w\")",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },

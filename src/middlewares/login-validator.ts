@@ -1,5 +1,5 @@
 import { IsString, IsEmail, validateSync } from 'class-validator';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { plainToClass } from 'class-transformer';
 
 import { generateResponseMiddleware } from '@helpers/generate-response';
@@ -13,7 +13,7 @@ class LoginValues {
   password: string;
 }
 
-const validateLogin = (req: Request, res: Response) => {
+const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const user = req.body;
 
   const login = plainToClass(LoginValues, user, {
@@ -26,6 +26,8 @@ const validateLogin = (req: Request, res: Response) => {
     const response = generateResponseMiddleware(undefined, errors);
     return res.status(404).json(response);
   }
+
+  next()
 };
 
 export default validateLogin;

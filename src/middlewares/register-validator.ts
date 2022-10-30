@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import { plainToClass } from 'class-transformer';
 import { IsEmail, IsString, validateSync } from 'class-validator';
@@ -20,7 +20,7 @@ class RegisterValues {
   phone_number: string;
 }
 
-const validateRegister = (req: Request, res: Response) => {
+const validateRegister = (req: Request, res: Response, next: NextFunction) => {
   const user = req.body;
 
   const register = plainToClass(RegisterValues, user, {
@@ -33,6 +33,8 @@ const validateRegister = (req: Request, res: Response) => {
     const response = generateResponseMiddleware(undefined, errors);
     return res.status(404).json(response);
   }
+
+  next()
 };
 
 export default validateRegister;

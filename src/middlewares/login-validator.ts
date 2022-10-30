@@ -27,7 +27,7 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
     return res.status(404).json(response);
   }
 
-  next()
+  next();
 };
 
 export default validateLogin;

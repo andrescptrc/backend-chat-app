@@ -38,6 +38,6 @@ export const generateResponseController = (
   };
 };
 
-const generateErrorString = (errors: ValidationError[]) => {
+export const generateErrorString = (errors: ValidationError[]) => {
   return errors.map(error => Object.values(error.constraints || {})).flat();
 };

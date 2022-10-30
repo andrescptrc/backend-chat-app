@@ -26,14 +26,14 @@ module.exports = {
   ],
   resetMocks: true,
   moduleNameMapper: {
-    '^@models/(.*)': ['<rootDir>/models/$1'],
-    '^@controllers/(.*)': ['<rootDir>/controllers/$1'],
-    '^@middlewares/(.*)': ['<rootDir>/middlewares/$1'],
-    '^@constants/(.*)': ['<rootDir>/constants/$1'],
-    '^@routes/(.*)': ['<rootDir>/routes/$1'],
-    '^@interfaces/(.*)': ['<rootDir>/interfaces/$1'],
-    '^@helpers/(.*)': ['<rootDir>/helpers/$1'],
-    '^@db/(.*)': ['<rootDir>/db/$1'],
-    '^@lib/(.*)': ['<rootDir>/lib/$1']
+    '^@models/(.*)': ['<rootDir>/src/models/$1'],
+    '^@controllers/(.*)': ['<rootDir>/src/controllers/$1'],
+    '^@middlewares/(.*)': ['<rootDir>/src/middlewares/$1'],
+    '^@constants/(.*)': ['<rootDir>/src/constants/$1'],
+    '^@routes/(.*)': ['<rootDir>/src/routes/$1'],
+    '^@interfaces/(.*)': ['<rootDir>/src/interfaces/$1'],
+    '^@helpers/(.*)': ['<rootDir>/src/helpers/$1'],
+    '^@db/(.*)': ['<rootDir>/src/db/$1'],
+    '^@lib/(.*)': ['<rootDir>/src/lib/$1']
   }
 };

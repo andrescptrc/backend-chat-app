@@ -1,8 +1,8 @@
-import { ValidationError } from 'class-validator';
+import { ValidationError } from 'joi';
 
 export const generateResponseMiddleware = (
   data: unknown,
-  errors: ValidationError[] | undefined
+  errors: ValidationError | undefined
 ) => {
   if (!data && errors) {
     return {
@@ -38,6 +38,7 @@ export const generateResponseController = (
   };
 };
 
-export const generateErrorString = (errors: ValidationError[]) => {
-  return errors.map(error => Object.values(error.constraints || {})).flat();
+export const generateErrorString = (errors: ValidationError) => {
+  const errorsArr = errors.details.map(detail => detail.message);
+  return errorsArr;
 };

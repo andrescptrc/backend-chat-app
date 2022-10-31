@@ -12,6 +12,7 @@
       "@models/*": ["./models/*"],
       "@controllers/*": ["./controllers/*"],
       "@middlewares/*": ["./middlewares/*"],
+      "@schemas/*": ["./schemas/*"],
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
       "@interfaces/*": ["./interfaces/*"],

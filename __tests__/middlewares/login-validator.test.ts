@@ -1,4 +1,4 @@
-import validateLogin from '@middlewares/login-validator';
+import validateLogin from '@middlewares/login-validation';
 import { NextFunction, Request, Response } from 'express';
 
 describe('Middleware Login Validator', () => {

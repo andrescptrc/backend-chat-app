@@ -1,9 +1,10 @@
+import { ValidationError } from 'joi';
+
 import {
   generateErrorString,
   generateResponseController,
   generateResponseMiddleware
 } from '@helpers/generate-response';
-import { ValidationError } from 'class-validator';
 
 describe('Generate Response', () => {
   it('Should generate a failed response with the given message', () => {
@@ -36,13 +37,11 @@ describe('Generate Response', () => {
   it('Should generate an array of strings with the given errors', () => {
     const emailError = 'The email is not valid';
 
-    const validationError = [
-      {
-        constraints: { isEmail: emailError }
-      }
-    ] as unknown as ValidationError[];
+    const validationError = {
+      details: [{ message: emailError }]
+    } as Partial<ValidationError>;
 
-    const errorArray = generateErrorString(validationError);
+    const errorArray = generateErrorString(validationError as ValidationError);
 
     expect(errorArray[0]).toBe(emailError);
   });
@@ -56,15 +55,13 @@ describe('Generate Response', () => {
       errors: [emailError]
     };
 
-    const validationError = [
-      {
-        constraints: { isEmail: emailError }
-      }
-    ] as unknown as ValidationError[];
+    const validationError = {
+      details: [{ message: emailError }]
+    } as Partial<ValidationError>;
 
     const messageGenerated = generateResponseMiddleware(
       undefined,
-      validationError
+      validationError as ValidationError
     );
 
     expect(messageGenerated).toStrictEqual(responseFailed);

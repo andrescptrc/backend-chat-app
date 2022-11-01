@@ -18,6 +18,14 @@ module.exports = {
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
     '^.+\\.module\\.(css|sass|scss)$'
   ],
+  coverageThreshold: {
+    global: {
+      branches: 31,
+      functions: 32,
+      lines: 41,
+      statements: 41
+    }
+  },
   modulePaths: ['<rootDir>'],
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   watchPlugins: [

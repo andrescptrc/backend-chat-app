@@ -5,7 +5,7 @@ import { generateResponseMiddleware } from '@helpers/generate-response';
 import validateLogin from '@schemas/login-validator';
 
 const loginValidation = (req: Request, res: Response, next: NextFunction) => {
-  const user = req.body;
+  const user = req.body || {};
 
   const { error } = validateLogin(user);
 

@@ -1,12 +1,27 @@
+import { Response } from 'express';
 import { ValidationError } from 'joi';
+
+import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
+import { IRequestStatus } from '@interfaces/middlewares-test';
 
 import {
   generateErrorString,
-  generateResponseController,
-  generateResponseMiddleware
-} from '@helpers/generate-response';
+  generateResponse,
+  middlewareResponse
+} from '@helpers';
 
 describe('Generate Response', () => {
+  let mockResponse: Partial<Response>;
+
+  beforeEach(() => {
+    mockResponse = {};
+
+    mockResponse.status = jest.fn(
+      () => mockResponse
+    ) as unknown as IRequestStatus;
+    mockResponse.json = jest.fn();
+  });
+
   it('Should generate a failed response with the given message', () => {
     const responseFailed = {
       response: 'fail',
@@ -14,11 +29,14 @@ describe('Generate Response', () => {
       errors: ['Internal Server Error']
     };
 
-    const messageGenerated = generateResponseController(undefined, [
-      'Internal Server Error'
-    ]);
+    generateResponse(
+      undefined,
+      HTTP_STATUS_CODES.BAD_REQUEST,
+      mockResponse as Response,
+      ['Internal Server Error']
+    );
 
-    expect(messageGenerated).toStrictEqual(responseFailed);
+    expect(mockResponse.json).toHaveBeenCalledWith(responseFailed);
   });
 
   it('Should generate a success response with the given message', () => {
@@ -29,9 +47,14 @@ describe('Generate Response', () => {
       errors: []
     };
 
-    const messageGenerated = generateResponseController(data, undefined);
+    generateResponse(
+      data,
+      HTTP_STATUS_CODES.OK,
+      mockResponse as Response,
+      undefined
+    );
 
-    expect(messageGenerated).toStrictEqual(responseSuccess);
+    expect(mockResponse.json).toHaveBeenCalledWith(responseSuccess);
   });
 
   it('Should generate an array of strings with the given errors', () => {
@@ -59,12 +82,14 @@ describe('Generate Response', () => {
       details: [{ message: emailError }]
     } as Partial<ValidationError>;
 
-    const messageGenerated = generateResponseMiddleware(
+    middlewareResponse(
       undefined,
+      HTTP_STATUS_CODES.NOT_FOUND,
+      mockResponse as Response,
       validationError as ValidationError
     );
 
-    expect(messageGenerated).toStrictEqual(responseFailed);
+    expect(mockResponse.json).toHaveBeenCalledWith(responseFailed);
   });
 
   it('Should geneate a middleware success response with the given data', () => {
@@ -76,8 +101,13 @@ describe('Generate Response', () => {
       errors: []
     };
 
-    const messageGenerated = generateResponseMiddleware(data, undefined);
+    middlewareResponse(
+      data,
+      HTTP_STATUS_CODES.OK,
+      mockResponse as Response,
+      undefined
+    );
 
-    expect(messageGenerated).toStrictEqual(reponseSuccess);
+    expect(mockResponse.json).toHaveBeenCalledWith(reponseSuccess);
   });
 });

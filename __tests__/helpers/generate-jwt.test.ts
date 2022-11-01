@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import generateJWT from '@helpers/generate-jwt';
+import { generateJWT } from '@helpers';
 
 describe('Generate JWT test', () => {
   it('should generate the token with a given payload', async () => {

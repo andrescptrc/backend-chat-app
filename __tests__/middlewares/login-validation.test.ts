@@ -1,7 +1,7 @@
-import { IRequestStatus, IUserData } from '@interfaces/middlewares-test';
+import { IRequestStatus } from '@interfaces/middlewares-test';
 import { NextFunction, Request, Response } from 'express';
 
-import validateLogin from '@middlewares/login-validation';
+import loginValidation from '@middlewares/login-validation';
 
 describe('Middleware Login Validator', () => {
   let userData: IUserData;
@@ -32,7 +32,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -56,7 +56,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -86,7 +86,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -113,7 +113,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -140,7 +140,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -170,7 +170,7 @@ describe('Middleware Login Validator', () => {
       }
     };
 
-    validateLogin(
+    loginValidation(
       mockRequest as Request,
       mockResponse as Response,
       nextFunction
@@ -179,3 +179,14 @@ describe('Middleware Login Validator', () => {
     expect(mockResponse.json).toHaveBeenCalledWith(expectedResponse);
   });
 });
+
+type IUserData =
+  | {
+      email: string;
+      password: string;
+    }
+  | {
+      email: number;
+      password: number;
+    }
+  | {};

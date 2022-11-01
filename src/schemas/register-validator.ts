@@ -2,10 +2,11 @@ import schemaValidator from '@helpers/schema-validator';
 import Joi from 'joi';
 
 const registerSchema = Joi.object({
-  name: Joi.string().min(3).max(24).required().messages({
+  name: Joi.string().min(3).max(34).required().messages({
     'string.base': 'The name must be a string.',
+    'string.empty': 'The name must not be empty.',
     'string.min': 'The name must have at least 3 characters at minimum.',
-    'string.max': 'The name must have 24 characters at maximun.',
+    'string.max': 'The name must have 56 characters at maximun.',
     'any.required': 'The name is required.'
   }),
   email: Joi.string().email().required().messages({
@@ -23,7 +24,7 @@ const registerSchema = Joi.object({
   }),
   phone_number: Joi.string().min(8).max(16).messages({
     'string.base': 'The phone_number must be a string.',
-    'string.empty': 'the phone_number must not be empty.',
+    'string.empty': 'The phone_number must not be empty.',
     'string.min': 'The phone_number must have at least 8 characters.',
     'string.max': 'The phone_number must not exceed the 16 characters.'
   })

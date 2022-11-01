@@ -98,3 +98,17 @@ export const register = async (req: Request, res: Response) => {
     res.status(500).json(response);
   }
 };
+
+export const currentUser = async (req: Request, res: Response) => {
+  try {
+    const user = req.user;
+
+    const response = generateResponseController(user, undefined);
+    res.status(200).json(response);
+  } catch (error) {
+    const response = generateResponseController(undefined, [
+      'Internal Server Error'
+    ]);
+    res.status(500).json(response);
+  }
+};

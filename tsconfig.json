@@ -11,7 +11,7 @@
     "paths": {
       "@models/*": ["./models/*"],
       "@controllers/*": ["./controllers/*"],
-      "@middlewares/*": ["./middlewares/*"],
+      "@middlewares": ["./middlewares/index.ts"],
       "@schemas/*": ["./schemas/*"],
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
@@ -28,6 +28,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
+    "noImplicitAny": true,
 
     /* Type Checking */
     "strict": true,

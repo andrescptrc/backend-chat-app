@@ -1,16 +1,20 @@
 import { Response } from 'express';
 
-const generateResponse = (
+import { ValidationError } from 'joi';
+
+import generateErrorString from './generate-error-string';
+
+export const middlewareResponse = (
   data: unknown,
   statusCode: number,
   res: Response,
-  errors: string[] | undefined
+  errors: ValidationError | undefined
 ) => {
   if (!data && errors) {
     return res.status(statusCode).json({
       response: 'fail',
       data: {},
-      errors
+      errors: generateErrorString(errors)
     });
   }
 
@@ -21,4 +25,4 @@ const generateResponse = (
   });
 };
 
-export default generateResponse;
+export default middlewareResponse;

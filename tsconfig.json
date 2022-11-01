@@ -16,7 +16,7 @@
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@helpers/*": ["./helpers/*"],
+      "@helpers": ["./helpers/index.ts"],
       "@db/*": ["./db/*"],
       "@lib/*": ["./lib/*"]
     },

@@ -1,20 +1,19 @@
-import { generateResponseController } from '@helpers/generate-response';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 import prisma from '@lib/prisma-client';
+import { generateResponse } from '@helpers';
+import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
 
 const JWT_KEY = process.env.JWT_KEY || '';
 
 const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('Authorization');
+  const token = req.headers.authorization as string;
 
   if (!token) {
-    const response = generateResponseController(undefined, [
+    return generateResponse(undefined, HTTP_STATUS_CODES.UNAUTHORIZED, res, [
       'The token is required'
     ]);
-
-    return res.status(401).json(response);
   }
 
   try {
@@ -27,19 +26,15 @@ const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     if (!user) {
-      const response = generateResponseController(undefined, [
+      return generateResponse(undefined, HTTP_STATUS_CODES.UNAUTHORIZED, res, [
         "The token is not valid - the user doesn't exist"
       ]);
-
-      return res.status(401).json(response);
     }
 
     if (!user.state) {
-      const response = generateResponseController(undefined, [
+      return generateResponse(undefined, HTTP_STATUS_CODES.UNAUTHORIZED, res, [
         'The token is not valid - the user is deleted'
       ]);
-
-      return res.status(401).json(response);
     }
 
     const { password, ...rest } = user;
@@ -48,10 +43,9 @@ const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
 
     next();
   } catch (error) {
-    const response = generateResponseController(undefined, [
-      'Internal Server Error'
+    return generateResponse(undefined, HTTP_STATUS_CODES.UNAUTHORIZED, res, [
+      'The token expired.'
     ]);
-    res.status(500).json(response);
   }
 };
 

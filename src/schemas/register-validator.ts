@@ -1,5 +1,6 @@
-import schemaValidator from '@helpers/schema-validator';
 import Joi from 'joi';
+
+import { schemaValidator } from '@helpers';
 
 const registerSchema = Joi.object({
   name: Joi.string().min(3).max(34).required().messages({

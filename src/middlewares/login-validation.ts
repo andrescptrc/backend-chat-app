@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { generateResponseMiddleware } from '@helpers/generate-response';
-
 import validateLogin from '@schemas/login-validator';
+import { middlewareResponse } from '@helpers';
+import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
 
 const loginValidation = (req: Request, res: Response, next: NextFunction) => {
   const user = req.body;
@@ -10,8 +10,12 @@ const loginValidation = (req: Request, res: Response, next: NextFunction) => {
   const { error } = validateLogin(user);
 
   if (error) {
-    const response = generateResponseMiddleware(undefined, error);
-    return res.status(404).json(response);
+    return middlewareResponse(
+      undefined,
+      HTTP_STATUS_CODES.BAD_REQUEST,
+      res,
+      error
+    );
   }
 
   next();

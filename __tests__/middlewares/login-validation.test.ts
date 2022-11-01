@@ -1,7 +1,7 @@
 import { IRequestStatus } from '@interfaces/middlewares-test';
 import { NextFunction, Request, Response } from 'express';
 
-import loginValidation from '@middlewares/login-validation';
+import { loginValidation } from '@middlewares';
 
 describe('Middleware Login Validator', () => {
   let userData: IUserData;

@@ -1,6 +1,7 @@
 import { IRequestStatus } from '@interfaces/middlewares-test';
-import registerValidation from '@middlewares/register-validation';
 import { NextFunction, Request, Response } from 'express';
+
+import { registerValidation } from '@middlewares';
 
 describe('Middleware Register Validator', () => {
   let userData;

@@ -5,8 +5,8 @@ import * as argon2 from 'argon2';
 
 import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
 
-import generateResponse from '@helpers/generate-response';
 import generateJWT from '@helpers/generate-jwt';
+import generateResponse from '@helpers/generate-response';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -33,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
     const verifyPassword = await argon2.verify(user.password, password);
 
     if (!verifyPassword) {
-      return generateResponse(undefined, HTTP_STATUS_CODES.NOT_FOUND, res, [
+      return generateResponse(undefined, HTTP_STATUS_CODES.BAD_REQUEST, res, [
         'The email or password are incorrect'
       ]);
     }

@@ -14,6 +14,10 @@ export const get = async (url: string, token: string): Promise<req.Test> => {
   return await req(app).get(url).set('authorization', token);
 };
 
+export const deleteReq = async (url: string): Promise<req.Test> => {
+  return await req(app).delete(url);
+};
+
 export const put = async (
   url: string,
   data: object,

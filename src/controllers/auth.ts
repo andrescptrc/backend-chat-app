@@ -62,7 +62,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     if (userDB) {
-      return generateResponse(undefined, HTTP_STATUS_CODES.NOT_FOUND, res, [
+      return generateResponse(undefined, HTTP_STATUS_CODES.BAD_REQUEST, res, [
         'The user already exist'
       ]);
     }
@@ -84,7 +84,6 @@ export const register = async (req: Request, res: Response) => {
 
     return generateResponse({ token }, HTTP_STATUS_CODES.OK, res, undefined);
   } catch (error) {
-    console.log(error);
     return generateResponse(
       undefined,
       HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,

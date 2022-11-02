@@ -1,7 +1,10 @@
 import { Router } from 'express';
 
 import { currentUser, login, register } from '@controllers/auth';
-import { loginValidation, registerValidation, validateJWT } from '@middlewares';
+
+import loginValidation from '@middlewares/login-validation';
+import registerValidation from '@middlewares/register-validation';
+import validateJWT from '@middlewares/validate-jwt';
 
 const router = Router();
 

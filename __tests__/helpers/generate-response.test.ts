@@ -4,11 +4,9 @@ import { ValidationError } from 'joi';
 import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
 import { IRequestStatus } from '@interfaces/middlewares-test';
 
-import {
-  generateErrorString,
-  generateResponse,
-  middlewareResponse
-} from '@helpers';
+import generateResponse from '@helpers/generate-response';
+import generateErrorString from '@helpers/generate-error-string';
+import middlewareResponse from '@helpers/middleware-response';
 
 describe('Generate Response', () => {
   let mockResponse: Partial<Response>;

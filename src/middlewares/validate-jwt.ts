@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 import prisma from '@lib/prisma-client';
-import { generateResponse } from '@helpers';
 import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
+import generateResponse from '@helpers/generate-response';
 
 const JWT_KEY = process.env.JWT_KEY || '';
 

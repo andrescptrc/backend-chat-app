@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
 import validateRegister from '@schemas/register-validator';
-import { middlewareResponse } from '@helpers';
 import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
+import middlewareResponse from '@helpers/middleware-response';
 
 const registerValidation = (
   req: Request,

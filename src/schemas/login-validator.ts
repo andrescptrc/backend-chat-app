@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { schemaValidator } from '@helpers';
+import schemaValidator from '@helpers/schema-validator';
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required().messages({

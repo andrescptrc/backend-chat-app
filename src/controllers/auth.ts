@@ -3,8 +3,10 @@ import { Request, Response } from 'express';
 import prisma from '@lib/prisma-client';
 import * as argon2 from 'argon2';
 
-import { generateJWT, generateResponse } from '@helpers';
 import { HTTP_STATUS_CODES } from '@constants/http-status-codes';
+
+import generateResponse from '@helpers/generate-response';
+import generateJWT from '@helpers/generate-jwt';
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;

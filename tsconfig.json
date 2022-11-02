@@ -11,12 +11,12 @@
     "paths": {
       "@models/*": ["./models/*"],
       "@controllers/*": ["./controllers/*"],
-      "@middlewares": ["./middlewares/index.ts"],
+      "@middlewares/*": ["./middlewares/*"],
       "@schemas/*": ["./schemas/*"],
       "@constants/*": ["./constants/*"],
       "@routes/*": ["./routes/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@helpers": ["./helpers/index.ts"],
+      "@helpers/*": ["./helpers/*"],
       "@db/*": ["./db/*"],
       "@lib/*": ["./lib/*"]
     },

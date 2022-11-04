@@ -90,8 +90,8 @@ describe('Register Auth Controller', () => {
       phone_number: '+573125681362'
     };
 
-    //This is to don't create trash on the DB
-    await deleteReq(`/api/user/${email}`);
+    //This is for don't create trash on the DB
+    await deleteReq(`/api/user/test/${email}`);
 
     const res = await post('/api/auth/register', userData);
 

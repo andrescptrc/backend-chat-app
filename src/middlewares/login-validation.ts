@@ -6,7 +6,6 @@ import middlewareResponse from '@helpers/middleware-response';
 
 const loginValidation = (req: Request, res: Response, next: NextFunction) => {
   const user = req.body;
-
   const { error } = validateLogin(user);
 
   if (error) {

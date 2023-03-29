@@ -8,7 +8,6 @@ const generateJWT = (uid: string) => {
 
     jwt.sign(payload, JWT_KEY, { expiresIn: '4h' }, (err, token) => {
       if (err) {
-        console.log(err);
         reject('Unable to generate the token');
       } else {
         resolve(token);

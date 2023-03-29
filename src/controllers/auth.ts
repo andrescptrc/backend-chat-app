@@ -46,7 +46,7 @@ export const login = async (req: Request, res: Response) => {
       undefined,
       HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
       res,
-      ['Internal Server Error']
+      [error.message]
     );
   }
 };
@@ -81,6 +81,21 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const token = await generateJWT(user.uid);
+
+    return generateResponse({ token }, HTTP_STATUS_CODES.OK, res, undefined);
+  } catch (error) {
+    return generateResponse(
+      undefined,
+      HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+      res,
+      ['Internal Server Error']
+    );
+  }
+};
+
+export const isAuthenticated = async (req: Request, res: Response) => {
+  try {
+    const token = req.token;
 
     return generateResponse({ token }, HTTP_STATUS_CODES.OK, res, undefined);
   } catch (error) {

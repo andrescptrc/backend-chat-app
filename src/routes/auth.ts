@@ -1,6 +1,11 @@
 import { Router } from 'express';
 
-import { currentUser, login, register } from '@controllers/auth';
+import {
+  currentUser,
+  isAuthenticated,
+  login,
+  register
+} from '@controllers/auth';
 
 import loginValidation from '@middlewares/login-validation';
 import registerValidation from '@middlewares/register-validation';
@@ -11,6 +16,8 @@ const router = Router();
 router.post('/login', loginValidation, login);
 
 router.post('/register', registerValidation, register);
+
+router.get('/is-authenticated', validateJWT, isAuthenticated);
 
 router.get('/current', validateJWT, currentUser);
 

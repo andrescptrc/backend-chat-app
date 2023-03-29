@@ -40,6 +40,7 @@ const validateJWT = async (req: Request, res: Response, next: NextFunction) => {
     const { password, ...rest } = user;
 
     req.user = rest;
+    req.token = token;
 
     next();
   } catch (error) {
